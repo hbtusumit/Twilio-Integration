@@ -1,0 +1,94 @@
+openapi: '3.0.2'
+info:
+  title: Swagger API Platform
+  version: '1.0'
+  description: "Swagger is Open  Source Api Tools."
+servers:
+  - url: http://localhost:3000
+
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+
+paths:
+  /sms:
+    post:
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:  
+          application/x-www-form-urlencoded:
+          #multipart/form-data:  
+            schema:
+              type: object
+              properties:
+                FROM:
+                  type: string
+                TO:
+                  type: string
+                BODY:
+                  type: string  
+              required:
+                - FROM
+                - TO
+                - BODY     
+                
+      responses:
+        '201': 
+          description: SMS Send Successfully  
+
+  /mms:
+    post:
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:  
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                FROM:
+                  type: string
+                TO:
+                  type: string
+                BODY:
+                  type: string  
+                ATTCHMENT:
+                  type: string
+                  format: binary
+              required:
+                - FROM
+                - TO
+                - BODY     
+                
+      responses:
+        '201': 
+          description: MMS Send Successfully  
+
+  /makecall:
+    post:
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:  
+          application/x-www-form-urlencoded:  
+            schema:
+              type: object
+              properties:
+                FROM:
+                  type: string
+                TO:
+                  type: string
+              required:
+                - FROM
+                - TO    
+                
+      responses:
+        '201': 
+         description: Call Connected Successfully 
